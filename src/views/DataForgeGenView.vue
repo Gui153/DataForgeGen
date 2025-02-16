@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import DataForge from '../components/DataForge.vue'
+import DataForgeGen from '../components/DataForgeGen.vue'
 import ref from "vue"
 
 
@@ -15,6 +15,6 @@ import ref from "vue"
     <h3>
       A all in one data generator used to generate sample data in your prefered format.
     </h3>
-    <DataForge />
+    <DataForgeGen />
   </main>
 </template>
