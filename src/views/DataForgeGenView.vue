@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import DataForgeGen from '../components/DataForgeGen.vue'
-import ref from "vue"
+import {ref} from "vue"
 
 
 </script>
@@ -18,3 +18,11 @@ import ref from "vue"
     <DataForgeGen />
   </main>
 </template>
+
+
+
+
+   
+
+
+   

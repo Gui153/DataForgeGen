@@ -36,7 +36,7 @@ function getRandString(){
 
 
 
-function jsonGenerator(input){
+function jsonGenerator(input:string){
     if(input.length == 0){
         input = '{"key1":"int", "key2":"String","key3":"bool","key4":"float","key5":"char", "key6":"default|unknown datatype"}'
     }
@@ -52,14 +52,14 @@ function jsonGenerator(input){
 	    }
         console.log(error);
         GeneratedData.value ="";
-        generationError.value=error;
+        generationError.value=""+error;
         return;
     
     }
     console.log(parse)
     var keys = Object.keys(parse)
     console.log(keys)
-    var generated: {[key:String ] : any} = {};
+    var generated: {[key:string ] : any} = {};
     for (var i = 0; i < keys.length; i++){
         var val = parse[keys[i]];
         
