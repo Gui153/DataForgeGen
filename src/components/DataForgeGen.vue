@@ -8,20 +8,20 @@ const GeneratedData = ref("")
 const generationError = ref("")
 const copyTxt = ref("Copy to clipboard")
 
-function getRandInt(){
-    return Math.round(Math.random() * (2147483647))
+function getRandInt(min=0, max = 2147483647, arraySize = -1){
+    return Math.round(Math.random() * (max-min)+ min)
 }
 
-function getRandFloat(){
-    return Math.random() * (2147483647)
+function getRandFloat(min=0, max = 2147483647){
+    return Math.random() * (max-min)+ min
 }
 
 function getRandBool(){
     return Math.round(Math.random() ) == 1 ? true : false
 }
 
-function getRandChar(){
-    return String.fromCharCode( Math.round(Math.random() * (126-33)+33))
+function getRandChar(min=33, max = 126){
+    return String.fromCharCode( Math.round(Math.random() * (max-min)+ min))
 }
 
 function getRandString(){
@@ -56,17 +56,109 @@ function jsonGenerator(input:string){
         return;
     
     }
-    console.log(parse)
+    //console.log(parse)
     const keys = Object.keys(parse)
-    console.log(keys)
+    //console.log(keys)
     const generated: {[key:string ] : any} = {};
     for (let i = 0; i < keys.length; i++){
-        const val = parse[keys[i]];
+        var val:String = ""+parse[keys[i]];
+        var arrSize = -1
+        var min = undefined
+        var max = undefined
+        //console.log(val)
+        const firstSB = val.indexOf("[")
+        const secondSB = val.indexOf("]")
+
         
+        if (firstSB >= 0 || secondSB >= 0){
+            try {
+                if(firstSB < 0){
+                    throw new Error("Missing \"[\" when defining an array, on key "+keys[i]+".");
+                }
+                else if(secondSB < 0){
+                    throw new Error("Missing \"]\" when defining an array, on key "+keys[i]+".");
+                }
+                else if(firstSB > secondSB ){
+                    throw new Error("Cloasing \"]\" going first when \"[\" should be first, on key "+keys[i]+".");
+                }
+                
+                arrSize = parseInt(val.substring(firstSB+1, secondSB))
+
+                if(isNaN(arrSize)){
+                    throw new Error("The array size provided is not a number, on key "+keys[i]+".");
+                }
+                console.log(arrSize + "\t arrSize")
+                var temp = val.substring(0, firstSB)
+                val = temp + val.substring(secondSB+1)
+
+            }
+            catch(error){
+                console.log(error);
+                GeneratedData.value ="";
+                generationError.value=""+error;
+                return;
+            }
+        }
+
+        const firstP = val.indexOf("(")
+        const secondP = val.indexOf(")")
+        //console.log(val)
+        if (firstP >= 0 || secondP >= 0){
+            try {
+                if(firstP < 0){
+                    throw new Error("Missing \"(\" when defining an array, on key "+keys[i]+".");
+                }
+                else if(secondP < 0){
+                    throw new Error("Missing \")\" when defining an array, on key "+keys[i]+".");
+                }
+                else if(firstP > secondP ){
+                    throw new Error("Cloasing \")\" going first when \"(\" should be first, on key "+keys[i]+".");
+                }
+                
+                
+                var minNmax = val.substring(firstP+1, secondP)
+                const comma = minNmax.indexOf(",")
+                if(comma < 0){
+
+                    min =  parseInt(minNmax)
+
+                }else{
+                    min =  parseInt(minNmax.substring(0, comma))
+                    max =  parseInt(minNmax.substring(comma+1))
+
+                    if(isNaN(max)){
+                        throw new Error("The maximun value provided is not a number, on key "+keys[i]+".");
+                    }   
+                }
+                
+                console.log(minNmax + "\t minNmax")
+                console.log(max+ "\t min")
+                console.log(min+ "\t min")
+                
+
+
+                if(isNaN(min)){
+                    throw new Error("The minimun value provided is not a number, on key "+keys[i]+".");
+                }
+                
+                var temp = val.substring(0, firstP)
+                val = temp + val.substring(secondP+1)
+                
+            }
+            catch(error){
+                console.log(error);
+                GeneratedData.value ="";
+                generationError.value=""+error;
+                return;
+            }
+            
+        }
+        
+        console.log(val)
         switch (val) {
             case "int":
-                console.log(getRandInt())
-                generated[keys[i]] = getRandInt()
+                //console.log(getRandInt())
+                generated[keys[i]] = getRandInt(min,max, arrSize)
                 
                 break;
             case "String":
@@ -78,11 +170,11 @@ function jsonGenerator(input:string){
                 break;
 
             case "float":
-                generated[keys[i]] = getRandFloat()
+                generated[keys[i]] = getRandFloat(min, max)
                 break;
 
             case "char":
-                generated[keys[i]] = getRandChar()
+                generated[keys[i]] = getRandChar(min, max)
                 break;
         
             default:
