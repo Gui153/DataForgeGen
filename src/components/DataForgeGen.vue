@@ -8,20 +8,20 @@ const GeneratedData = ref("")
 const generationError = ref("")
 const copyTxt = ref("Copy to clipboard")
 
-function getRandInt(){
-    return Math.round(Math.random() * (2147483647))
+function getRandInt(min=0, max = 2147483647, arraySize = -1){
+    return Math.round(Math.random() * (max-min)+ min)
 }
 
-function getRandFloat(){
-    return Math.random() * (2147483647)
+function getRandFloat(min=0, max = 2147483647){
+    return Math.random() * (max-min)+ min
 }
 
 function getRandBool(){
     return Math.round(Math.random() ) == 1 ? true : false
 }
 
-function getRandChar(){
-    return String.fromCharCode( Math.round(Math.random() * (126-33)+33))
+function getRandChar(min=33, max = 126){
+    return String.fromCharCode( Math.round(Math.random() * (max-min)+ min))
 }
 
 function getRandString(){
@@ -56,16 +56,16 @@ function jsonGenerator(input:string){
         return;
     
     }
-    console.log(parse)
+    //console.log(parse)
     const keys = Object.keys(parse)
-    console.log(keys)
+    //console.log(keys)
     const generated: {[key:string ] : any} = {};
     for (let i = 0; i < keys.length; i++){
-        var val = parse[keys[i]];
+        var val:String = ""+parse[keys[i]];
         var arrSize = -1
-        var min = NaN
-        var max = NaN
-        console.log(val)
+        var min = undefined
+        var max = undefined
+        //console.log(val)
         const firstSB = val.indexOf("[")
         const secondSB = val.indexOf("]")
 
@@ -102,7 +102,7 @@ function jsonGenerator(input:string){
 
         const firstP = val.indexOf("(")
         const secondP = val.indexOf(")")
-        console.log(val)
+        //console.log(val)
         if (firstP >= 0 || secondP >= 0){
             try {
                 if(firstP < 0){
@@ -154,11 +154,11 @@ function jsonGenerator(input:string){
             
         }
         
-
+        console.log(val)
         switch (val) {
             case "int":
-                console.log(getRandInt())
-                generated[keys[i]] = getRandInt()
+                //console.log(getRandInt())
+                generated[keys[i]] = getRandInt(min,max, arrSize)
                 
                 break;
             case "String":
@@ -170,11 +170,11 @@ function jsonGenerator(input:string){
                 break;
 
             case "float":
-                generated[keys[i]] = getRandFloat()
+                generated[keys[i]] = getRandFloat(min, max)
                 break;
 
             case "char":
-                generated[keys[i]] = getRandChar()
+                generated[keys[i]] = getRandChar(min, max)
                 break;
         
             default:

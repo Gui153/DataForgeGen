@@ -7,6 +7,9 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
+      meta:{
+        icon: '../assets/logo-black.svg'
+      },
       component: DataForgeGenView,
     },
   ],

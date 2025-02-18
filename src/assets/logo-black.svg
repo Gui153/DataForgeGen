@@ -1,0 +1,37 @@
+<svg width="220" height="220" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+  <!-- Curly braces -->
+  <text x="0" y="135" font-size="125" font-family="monospace" fill="#333">{</text>
+  <text x="152" y="135" font-size="125" font-family="monospace" fill="#333">}</text>
+
+  <!-- Circle with dots and lines -->
+  <circle cx="110" cy="100" r="60" stroke="#333" stroke-width="2" fill="none"/>
+
+  <!-- Lines connecting dots -->
+  <line x1="80" y1="80" x2="130" y2="120" stroke="#999" stroke-width="1"/>
+  <line x1="100" y1="60" x2="110" y2="140" stroke="#999" stroke-width="1"/>
+
+  <!-- Dots inside the circle -->
+  <circle cx="80" cy="80" r="5" fill="blue">
+  <animate attributeName="opacity" values="1;0;1" dur="1.7s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="140" cy="120" r="5" fill="green">
+    <animate attributeName="opacity" values="1;0;1" dur="1.6s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="100" cy="60" r="5" fill="orange">
+    <animate attributeName="opacity" values="1;0;1" dur="1.2s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="120" cy="140" r="5" fill="blue">
+    <animate attributeName="opacity" values="1;0;1" dur="1.5s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="110" cy="100" r="5" fill="green">
+    <animate attributeName="opacity" values="1;0;1" dur="2s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Company Name -->
+  <text x="50" y="180" font-size="20" font-family="sans-serif" fill="#333">DataForgeGen</text>
+
+  <!-- Blinking cursor underline -->
+  <rect x="52" y="185" width="125" height="2" fill="#333">
+    
+  </rect>
+</svg>
