@@ -25,8 +25,8 @@ function getRandChar(){
 }
 
 function getRandString(){
-    var str = ""
-    var ch = ''
+    let str = ""
+    let ch = ''
     while (ch != '.'){
         ch = getRandChar()
         str += ch
@@ -43,7 +43,7 @@ function jsonGenerator(input:string){
     
     
     //console.log(input)
-    var parse;
+    let parse;
     try {
 	    parse = parseJson(input);
     } catch (error) {
@@ -57,11 +57,11 @@ function jsonGenerator(input:string){
     
     }
     console.log(parse)
-    var keys = Object.keys(parse)
+    const keys = Object.keys(parse)
     console.log(keys)
-    var generated: {[key:string ] : any} = {};
-    for (var i = 0; i < keys.length; i++){
-        var val = parse[keys[i]];
+    const generated: {[key:string ] : any} = {};
+    for (let i = 0; i < keys.length; i++){
+        const val = parse[keys[i]];
         
         switch (val) {
             case "int":
