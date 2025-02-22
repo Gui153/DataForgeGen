@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import DataForgeGen from '../components/DataForgeGen.vue'
 import {ref} from "vue"
 import jsonGenerator from '../components/JsonGenerator.vue'
 import HowToUse from '../components/HowToUse.vue'
