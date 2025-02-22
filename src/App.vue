@@ -4,7 +4,7 @@ import { RouterLink, RouterView } from 'vue-router'
 
 <template>
   <header>
-   
+    <meta name="google-site-verification" content="MSLpqsnSeZ5_Y9oXGTw08gViafZAFfa-xieeAk-9Yho" />
   </header>
 
   <RouterView />
