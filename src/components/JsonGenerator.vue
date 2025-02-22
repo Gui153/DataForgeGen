@@ -1,39 +1,13 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref } from "vue";
 import parseJson, {JSONError} from 'parse-json';
 
+import {getRandBool, getRandChar, getRandFloat, getRandInt, getRandString} from './scripts/randGenerators.ts'
 
 const text = ref("")
 const GeneratedData = ref("")
 const generationError = ref("")
 const copyTxt = ref("Copy to clipboard")
-
-function getRandInt(min=0, max = 2147483647, arraySize = -1){
-    return Math.round(Math.random() * (max-min)+ min)
-}
-
-function getRandFloat(min=0, max = 2147483647){
-    return Math.random() * (max-min)+ min
-}
-
-function getRandBool(){
-    return Math.round(Math.random() ) == 1 ? true : false
-}
-
-function getRandChar(min=33, max = 126){
-    return String.fromCharCode( Math.round(Math.random() * (max-min)+ min))
-}
-
-function getRandString(){
-    let str = ""
-    let ch = ''
-    while (ch != '.'){
-        ch = getRandChar()
-        str += ch
-    }
-    return str
-}
-
 
 
 function jsonGenerator(input:string){
@@ -208,9 +182,6 @@ async function reset() {
 </script>
 
 <template>
-    
-    
-    
     <label for="input">Insert your JSON schema to generate your data</label>
     <br>
     <textarea id="input" v-model="text"  placeholder='Example:
@@ -229,48 +200,6 @@ async function reset() {
     <button @click="copy()">{{ copyTxt }}</button>
     </div>
     <textarea class="readonly" v-model="GeneratedData" readonly ></textarea>
-    <h1>How to use:</h1>
-    <p>Type in your JSON template, with your given key name and value type, and let the program generate the data for you.</p>
-    <table>
-        <thead>
-            <tr>
-                <th>Type</th>
-                <th>Result</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>int</td>
-                <td>Returns a random integer from 0 to MAX_INTEGER_VALUE</td>
-            </tr>
-            <tr>
-                <td>float</td>
-                <td>Returns a random float that is greater than 1.0</td>
-            </tr>
-            <tr>
-                <td>String</td>
-                <td>Returns a random String of characters of values 33 - 126 in the ASCII table, and it stops generating at the first '.' generated</td>
-            </tr>
-            <tr>
-                <td>char</td>
-                <td>Returns a random character of value 33 - 126 in the ASCII table</td>
-            </tr>
-            <tr>
-                <td>bool</td>
-                <td>Returns a boolean [True | False]</td>
-            </tr>
-            <tr>
-                <td>Anything else</td>
-                <td>Returns null in case the program is not able to find the correct data type</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <h1>Future plans:</h1>
-    <p>Allow users to create arrays of certain data types ex: int[10] would create an array with 10 int values.</p>
-    <p>Allow users to create data within a certain range ex: int(10:100) would return an int from 10 to 100.</p>
-    <p>Allow users to use both of the above examples ex: int[10](10:100) would return an int array of 10 values from 10 to 100.</p>
-    <p>Make a parser for YAML and XML with a similar syntax.</p>
 
 </template>
 

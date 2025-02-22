@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import DataForgeGen from '../components/DataForgeGen.vue'
 import {ref} from "vue"
-
+import jsonGenerator from '../components/JsonGenerator.vue'
+import HowToUse from '../components/HowToUse.vue'
 
 </script>
 
@@ -15,7 +16,9 @@ import {ref} from "vue"
     <h3>
       A all in one data generator used to generate sample data in your prefered format.
     </h3>
-    <DataForgeGen />
+    
+    <jsonGenerator/>
+    <HowToUse/>
   </main>
 </template>
 
